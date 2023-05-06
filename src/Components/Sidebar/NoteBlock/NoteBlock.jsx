@@ -2,13 +2,17 @@ import React from 'react'
 
 import './NoteBlock.scss'
 
-function NoteBlock({active}) {
+function NoteBlock({active, data, setActive}) {
+
+  const notes = Object.values(data.values)
   return (
-    <div className={active ? 'NoteBlock Active': 'NoteBlock'}>
-        <strong>ASDfasdfasdfasdfasd</strong>
+    <div className={active === data.id ? 'NoteBlock Active': 'NoteBlock'} onClick = {() => {
+      setActive(data.id);
+    }}>
+        <strong>{notes[1]}</strong>
         <div className='NoteBlock-blockinfo'>
-           <span>Time</span>
-           <span>pice of text</span>
+           <span>{data.updated_at}</span>
+           <span>{notes[0]}</span>
         </div>
     </div>
   )

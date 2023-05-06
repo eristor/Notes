@@ -1,31 +1,33 @@
 .Workspace {
-    width: 70vw;
-    height: 100%;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    padding: 15px 30px 15px 30px;
-    &-time {
-        display: flex;
-        justify-content: center;
+  height: 100%;
+  width: 70vw;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding: 15px 30px 15px 30px;
+  &-time {
+    display: flex;
+    justify-content: center;
+  }
+  &-textfields {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-top: 30px;
+    & textarea {
+      height: 64vh;
+      width: 100%;
+      outline: none;
+      border: none;
+      background-color: #fafaf8;
+      resize: none;
+      font-weight: 500;
     }
-    &-textfields {
-        display: flex;
-        flex-direction: column;
-        gap: 30px;
-        margin-top: 30px;
-        & textarea {
-            height: 64vh;
-            width: 100%;
-            outline: none;
-            border: none;
-            background-color: #fafaf8;
-            resize: none;
-        }
-        & input {
-            width: 100%;
-            outline: none;
-            border: none;
-            background-color: #fafaf8;
-        }
+    & input {
+      width: 100%;
+      outline: none;
+      border: none;
+      background-color: #fafaf8;
+      font-weight: 700;
     }
+  }
 }
