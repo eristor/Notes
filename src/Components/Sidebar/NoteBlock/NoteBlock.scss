@@ -1,0 +1,15 @@
+.NoteBlock {
+    padding: 10px 15px 10px 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-top: .1px solid#e1e1df;
+    &-blockinfo {
+        display: flex;
+        align-items: center;
+        gap: 2vw;
+    }
+}
+.NoteBlock:last-child {
+    border-bottom: .1px solid#e1e1df;
+}

@@ -1,0 +1,12 @@
+.Toolbar {
+    height: 10vh;
+    background-color: #d6d6d6;
+    padding: 10px 4vw;
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+    &-buttons{ 
+        display: flex;
+        gap: 2vh;
+    }
+}

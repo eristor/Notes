@@ -1,0 +1,12 @@
+.Button{
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: .5vw 1vw .7vw 1.4vw;
+    border-radius: 5px;
+}
+
+.Button:hover {
+    cursor: pointer;
+}
