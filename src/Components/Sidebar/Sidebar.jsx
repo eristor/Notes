@@ -36,7 +36,7 @@ function Sidebar({ active, setActive, readonly }) {
           if (note.id === active.id) {
             return <Workspace note = {note} key = {note.id} update = {data.updateNotes} info = {info} readonly= {readonly}/>;
           }
-        }): <>Не вибрано нотатки</>}
+        }): <></>}
       </div>
     </div>
   );

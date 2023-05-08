@@ -34,8 +34,8 @@ function Workspace({note, update, info, readonly}) {
     <div className="Workspace">
         <span className="Workspace-time">{newNote.Date === info() ? newNote.Time : newNote.Date}</span>
       <div className="Workspace-textfields">
-        <input type= "text" placeholder="Type your title for this note please..." readOnly= {readonly} value={newNote.Title} onChange={(e) => handleTitleChange(e)}/>
-        <textarea type= "text" placeholder="Type your content for this note please..." readOnly= {readonly}  value={newNote.Text} onChange={(e) => handleTextChange(e)}/>
+        <input type= "text" placeholder="Напиши заголовок для цієї нотатки будь ласка..." readOnly= {readonly} value={newNote.Title} onChange={(e) => handleTitleChange(e)}/>
+        <textarea type= "text" placeholder="Напиши текст для цієї нотатки будь ласка..." readOnly= {readonly}  value={newNote.Text} onChange={(e) => handleTextChange(e)}/>
       </div>
     </div>
   );
