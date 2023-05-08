@@ -5,6 +5,10 @@ export const notesContext = createContext();
 
 function Context(props) {
   const [notes, setNotes] = useState([]);
+  const [search, setSearch] = useState("");
+  const [filteredArr, setFilteredArr] = useState([])
+
+  const smiley = "\u{1F60A}"
 
   const time = () => {
     const now = new Date();
@@ -26,6 +30,7 @@ function Context(props) {
       .get("https://6457fec10c15cb148215edda.mockapi.io/Notes")
       .then((response) => {
         setNotes(response.data);
+        setFilteredArr(response.data)
       })
       .catch((error) => {
         console.log(error);
@@ -35,8 +40,8 @@ function Context(props) {
     const emptyNote = {
       Time: time(),
       Date: curentDate(),
-      Title: "",
-      Text: "",
+      Title: `Звичайний заголовок ${smiley}`,
+      Text: `Звичайний текст ${smiley} ` ,
     };
     axios
       .post("https://6457fec10c15cb148215edda.mockapi.io/Notes", emptyNote)
@@ -75,6 +80,14 @@ function Context(props) {
         console.log(error);
       });
   };
+  const handleSearch = (event) => {
+    if(event.target.value === '') fetchData();
+    setSearch(event.target.value);
+    let filtered = notes.filter(item => {
+      return Object.values(item).join(' ').toLowerCase().includes(search.toLowerCase());
+    });
+    setFilteredArr(filtered);
+  };
 
   useEffect(() => {
     fetchData();
@@ -85,7 +98,12 @@ function Context(props) {
     createEmptyRecords,
     deleteNotes,
     curentDate,
-    updateNotes
+    updateNotes,
+    setSearch,
+    search,
+    handleSearch,
+    filteredArr,
+    setFilteredArr
   };
   return (
     <notesContext.Provider value={value}>

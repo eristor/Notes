@@ -2,18 +2,18 @@ import React, { useEffect, useState } from "react";
 
 import "./Workspace.scss";
 
-function Workspace({note, update, info}) {
+function Workspace({note, update, info, readonly}) {
 
   const [newNote, setNewNote] = useState(note);
-  const [timerId, setTimerId] = useState(null);
+  const [timerId, setTimerId] = useState({});
 
-  const resetTimer = () => {
+  const triggerFunctionWithDelay  = (newObject) => {
     if (timerId) {
       clearTimeout(timerId);
     }
     const newTimerId = setTimeout(() => {
-      update(note.id, newNote);
-    }, 1000);
+      update(note.id, newObject);
+    }, 700);
     setTimerId(newTimerId);
   }
 
@@ -21,30 +21,21 @@ function Workspace({note, update, info}) {
     const newTitle = event.target.value;
     const newObject = { ...newNote, Title: newTitle };
     setNewNote(newObject);
-    resetTimer();
+    triggerFunctionWithDelay(newObject);
   };
   const handleTextChange = (event) => {
     const newText = event.target.value;
     const newObject = { ...newNote, Text: newText };
     setNewNote(newObject);
-    resetTimer();
+    triggerFunctionWithDelay(newObject);
   };
-
-  useEffect(() => {
-    return () => {
-      if (timerId) {
-        clearTimeout(timerId);
-      }
-    };
-  }, [timerId]);
-
 
   return (
     <div className="Workspace">
         <span className="Workspace-time">{newNote.Date === info() ? newNote.Time : newNote.Date}</span>
       <div className="Workspace-textfields">
-        <input placeholder="Type your title for this note please..." value={newNote.Title} onChange={(e) => handleTitleChange(e)}/>
-        <textarea placeholder="Type your content for this note please..."  value={newNote.Text} onChange={(e) => handleTextChange(e)}/>
+        <input type= "text" placeholder="Type your title for this note please..." readOnly= {readonly} value={newNote.Title} onChange={(e) => handleTitleChange(e)}/>
+        <textarea type= "text" placeholder="Type your content for this note please..." readOnly= {readonly}  value={newNote.Text} onChange={(e) => handleTextChange(e)}/>
       </div>
     </div>
   );

@@ -1,10 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Sidebar.scss";
 import NoteBlock from "./NoteBlock/NoteBlock";
 import Workspace from "./Workspace/Workspace";
 import { notesContext } from "../../Context/Context";
 
-function Sidebar({ active, setActive }) {
+function Sidebar({ active, setActive, readonly }) {
   const data = useContext(notesContext);
   const notes = data.notes;
   const info = () => {
@@ -16,14 +16,14 @@ function Sidebar({ active, setActive }) {
   return (
     <div className="Sidebar">
       <div className="Sidebar-noteList">
-        {notes ? (
-          notes.map((data) => (
+        {data.filteredArr ? (
+          data.filteredArr.map((note) => (
             <NoteBlock
-              key={data.id}
+              key={note.id}
               active={active}
-              data={data}
+              data={note}
               setActive={setActive}
-              curentDate = {data.curentDate}
+              curentDate = {note.curentDate}
               info = {info}
             />
           ))
@@ -32,11 +32,11 @@ function Sidebar({ active, setActive }) {
         )}
       </div>
       <div className="Sidebar-workspace">
-        {notes ? notes.map((note) => {
+        {data.filteredArr ? data.filteredArr.map((note) => {
           if (note.id === active.id) {
-            return <Workspace note = {note} key = {note.id} update = {data.updateNotes} info = {info}/>;
+            return <Workspace note = {note} key = {note.id} update = {data.updateNotes} info = {info} readonly= {readonly}/>;
           }
-        }): <>1</>}
+        }): <>Не вибрано нотатки</>}
       </div>
     </div>
   );

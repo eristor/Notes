@@ -5,7 +5,7 @@ import Search from "../Search/Search";
 import { notesContext } from "../../Context/Context";
 import Modal from "../Modal/Modal";
 
-function Toolbar({ active, setActive, setReadonly }) {
+function Toolbar({ active, setActive, setReadonly, readonly }) {
   const data = useContext(notesContext);
 
   const [showModal, setShowModal] = useState(false);
@@ -30,17 +30,17 @@ function Toolbar({ active, setActive, setReadonly }) {
         <div onClick={() => data.createEmptyRecords()}>
           <Button icon="add" state={false} />
         </div>
-        <div onClick={() => handleDelete()}>
+        <div onClick={() => active.id ? handleDelete(): console.log("Виберіть якусь нотатку!")}>
           <Button 
             icon="trash alternate outline"
             state={active.id ? false: true}
           />
         </div>
         <div onClick={() => {active.id ? setReadonly(res => !res) : setReadonly(false)}}>
-          <Button icon="edit" state={active.id ? false: true} />
+          <Button icon="edit" state={active.id ? false: true} color={readonly ? "black" : 'red'}/>
         </div>
       </div>
-      <Search />
+      <Search search = {data.search} setSearch = {data.setSearch} handleSearch = {data.handleSearch}/>
       {showModal && (
         <Modal
           title="Підтвердження видалення"
