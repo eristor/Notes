@@ -6,12 +6,19 @@ import Toolbar from "./Components/Toolbar/Toolbar.jsx";
 
 function App() {
   
-  const [active, setActive] = useState();
-
+  const [active, setActive] = useState({
+    id: null,
+    Date: null,
+    Time: null,
+    Title: '',
+    Text: ''
+  });
+  const [readonly, setReadonly] = useState(false);
+  console.log(readonly);
   return (
     <div className="App">
-      <Toolbar active={active} setActive= {setActive}/>
-      <Sidebar active={active}  setActive= {setActive}/>
+      <Toolbar active={active} setActive= {setActive} setReadonly= {setReadonly}/>
+      <Sidebar active={active}  setActive= {setActive} readonly={readonly}  setReadonly= {setReadonly}/>
     </div>
   );
 }

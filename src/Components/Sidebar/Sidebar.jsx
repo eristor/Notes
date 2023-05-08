@@ -4,15 +4,17 @@ import NoteBlock from "./NoteBlock/NoteBlock";
 import Workspace from "./Workspace/Workspace";
 import { notesContext } from "../../Context/Context";
 
-function Sidebar({active, setActive}) {
+function Sidebar({ active, setActive }) {
   const data = useContext(notesContext);
-  console.log(data.notes);
   const notes = data.notes;
-  return (
-    <div
-      className="Sidebar"
+  const info = () => {
+    const now = new Date();
+    const dateString = now.toLocaleDateString();
+    return dateString;
+  }
 
-    >
+  return (
+    <div className="Sidebar">
       <div className="Sidebar-noteList">
         {notes ? (
           notes.map((data) => (
@@ -21,6 +23,8 @@ function Sidebar({active, setActive}) {
               active={active}
               data={data}
               setActive={setActive}
+              curentDate = {data.curentDate}
+              info = {info}
             />
           ))
         ) : (
@@ -28,7 +32,11 @@ function Sidebar({active, setActive}) {
         )}
       </div>
       <div className="Sidebar-workspace">
-        <Workspace />
+        {notes ? notes.map((note) => {
+          if (note.id === active.id) {
+            return <Workspace note = {note} key = {note.id} update = {data.updateNotes} info = {info}/>;
+          }
+        }): <>1</>}
       </div>
     </div>
   );
